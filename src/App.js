@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./styles.css";
+import { useSelector } from "react-redux";
+import Todo from "./Todo";
+import AddTodo from "./AddTodo";
 
-function App() {
+export default function App() {
+  const todoList = useSelector((state) => state);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="mainContainer">
+        <div className="header">Todo</div>
+        {todoList.map((todo) => {
+          return <Todo key={todo.id} data={todo} />;
+        })}
+        <AddTodo />
+      </div>
+      <div className="mainContainer notes">
+        How to use:
+        <ul>
+          <li>click on Add todo to add todo items.</li>
+          <li>click on todo item to update it</li>
+          <li>on mouse hover todo, delete icon will be visible.</li>
+          <li>clicking on checkbox will toggle todo item completed state,</li>
+        </ul>
+      </div>
     </div>
   );
 }
-
-export default App;
